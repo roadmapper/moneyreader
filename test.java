@@ -5,6 +5,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
 public class test {
 
 	public static void main(String[] args) {
@@ -16,9 +20,23 @@ public class test {
 		
 		System.out.println("Looking up information about " + stock + "...");
 		
-		
+		//initializing gui?
+        JFrame  appFrame = new JFrame("4240 Stock App");
+        appFrame.setSize(800, 600);
+        appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //Create a label
+        //JLabel appLabel = new JLabel("4240 Stock App");
+        //appFrame.add(appLabel);
+        
+        //Create a text thing
+        JTextArea stockText = new JTextArea();
+        //stockText.setText("Hello World!");    //That works.
+        appFrame.add(stockText);
+        
+        appFrame.setVisible(true);	//actually makes it visible
+       
         try { 
-
         	//skeleton code from stackexchange.  It works.  Woo.
             URL url = new URL("http://dev.markitondemand.com/Api/v2/Quote/jsonp?symbol=" + stock); 		//forming url for request
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 	//this uses a factory! :D
@@ -39,15 +57,16 @@ public class test {
                 finalJSON = finalJSON + output;			//building the response in JSON format
             }
             
-            System.out.println(finalJSON);
+            stockText.setText(finalJSON);		//putting this stuff on our gui
+            //System.out.println(finalJSON);
                
             connection.getResponseCode(); 
             connection.disconnect(); 
             
-        } catch(Exception e) { 
-            throw new RuntimeException(e); 
-        } 
-
+        }
+        
+        catch(Exception e) { 
+        	throw new RuntimeException(e); 
+        }   
     }
-
 }
