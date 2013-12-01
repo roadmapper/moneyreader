@@ -1,4 +1,7 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -34,11 +37,11 @@ public class test {
         //stockText.setText("Hello World!");    //That works.
         appFrame.add(stockText);
         
-        appFrame.setVisible(true);	//actually makes it visible
+        //appFrame.setVisible(true);	//actually makes it visible
        
         try { 
         	//skeleton code from stackexchange.  It works.  Woo.
-            URL url = new URL("http://dev.markitondemand.com/Api/v2/Quote/jsonp?symbol=" + stock); 		//forming url for request
+            URL url = new URL("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22" + stock + "%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"); 		//forming url for request
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(); 	//this uses a factory! :D
             connection.setDoOutput(true); 						//Tells the connection to look for output?
             connection.setInstanceFollowRedirects(false); 		//?
@@ -47,6 +50,8 @@ public class test {
 
             OutputStream os = connection.getOutputStream(); 
             os.flush(); 	//?
+            
+            
             
             BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream()))); // Getting the response from the webservice
 
@@ -58,9 +63,9 @@ public class test {
             }
             
             stockText.setText(finalJSON);		//putting this stuff on our gui
-            //System.out.println(finalJSON);
-               
-            connection.getResponseCode(); 
+            System.out.println(finalJSON);
+        	
+        	  connection.getResponseCode(); 
             connection.disconnect(); 
             
         }
