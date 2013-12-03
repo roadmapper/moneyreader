@@ -8,9 +8,10 @@ public class Portfolio {
 
 	private Portfolio() {
 		entryList = new ArrayList<PortfolioEntry> ();
+		instance.addEntry("NYSE");
+		instance.addEntry("SP500");
 	}
 
-	
 	public static Portfolio getInstance()
 
 	{
@@ -30,7 +31,7 @@ public class Portfolio {
 		}
 	}
 
-	public boolean addStock() {
+	public boolean addEntry(String string) {
 
 		return false;
 
@@ -44,6 +45,9 @@ public class Portfolio {
 
 	public static void main(String[] args) {
 
+		Portfolio portfolio = Portfolio.getInstance();
+		
+		
 	}
 
 }
