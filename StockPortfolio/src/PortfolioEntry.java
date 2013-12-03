@@ -1,9 +1,5 @@
+package StockPortfolio.src;
 
-public class PortfolioEntry {
-
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
+public interface PortfolioEntry {
+	public void update();
 }
