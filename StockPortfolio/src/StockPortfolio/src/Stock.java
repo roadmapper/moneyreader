@@ -26,10 +26,12 @@ public class Stock implements PortfolioEntry {
 	public Stock(String symbol, float shares) {
 		this.symbol = symbol;
 		this.numShares = shares;
-		
 	}
 	
-	public String getSymbol() {
+	
+	
+	@Override
+	public String getTicker() {
 		return this.symbol;
 	}
 	
@@ -64,12 +66,14 @@ public class Stock implements PortfolioEntry {
 		    jobject = jobject.getAsJsonObject("query");
 		    jobject = jobject.getAsJsonObject("results");
 		    jobject = jobject.getAsJsonObject("quote");
-		    System.out.println(jobject.get("Name"));
+		    this.name = jobject.get("Name").toString();
+		    //this.name = jobject.get("");
+		    System.out.println();
 		    
 		    
 			//System.out.println(finalJSON);
 
-			  connection.getResponseCode(); 
+			connection.getResponseCode(); 
 			connection.disconnect(); 
 
 		}
@@ -79,10 +83,24 @@ public class Stock implements PortfolioEntry {
 
 	}
 
+
+
 	@Override
-	public char[] getTicker() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getName() {
+		return this.name;
 	}
 
+
+
+	@Override
+	public float getLastPrice() {
+		return this.lastPrice;
+	}
+
+
+
+	@Override
+	public float getChange() {
+		return this.getChange();
+	}
 }
