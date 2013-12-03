@@ -40,6 +40,8 @@ public class Portfolio {
 			System.out
 					.format("+-----------------+----------+-------------+--------+--------+------------+%n");
 		}
+		
+		System.out.println();
 
 	}
 
@@ -80,42 +82,74 @@ public class Portfolio {
 		System.out.println("Enter a command: ");
 		portfolio.displayCommands();
 
-		String inputString = keyboard.nextLine();
-		int input;
+		String input = keyboard.nextLine();
 		
-		try {
-			input = Integer.parseInt(inputString);
-		} catch (Exception e) {
-			System.out.println("Only Integers! Try again.");
-			input = Integer.parseInt(keyboard.nextLine());
-		}
 
-		while (input != 0) {
+		while (!input.equals("0")) {
 
 			switch (input) {
-
-			case 1:
+			
+			//Individual Stock Data
+			case "1":
 				System.out.println("Enter a ticker symbol:");
 				String ticker = keyboard.nextLine();
 				portfolio.displayTicker(ticker);
+				portfolio.displayCommands();
 				break;
-			case 2:
+			//Add Stock 
+			case "2":
+				System.out.println("Enter the  ticker symbol of the stock you would like to add:");
+				ticker = keyboard.nextLine();
+				if (isIndex(ticker)){
+					System.out.println("How many shares? (Integer):");
+					int numShares = keyboard.nextInt();
+				}
+				//Factory Method??
+				portfolio.displayCommands();
 				break;
-			case 3:
+			//View Portfolio	
+			case "3":
+				portfolio.displayEntries();
+				portfolio.displayCommands();
 				break;
-			case 4:
+			//Remove a Stock	
+			case "4":
+				System.out.print("Entries to remove (type ticker): \n");
+				for(int i = 0; i < portfolio.entryList.size(); i++){
+					//Get ticker can change
+					System.out.print(portfolio.entryList.get(i).getTicker());
+					if(i != portfolio.entryList.size() -1)
+						System.out.print(", ");
+					else 
+						System.out.println(":");
+				}
+				portfolio.displayCommands();
+				break;
+			case "":
+				System.out.println();
 				break;
 			default:
-				System.out.println("Incorrect Command Number. Valid Commands:");
+				System.out.println("Incorrect Input. Enter Valid Command!");
 				portfolio.displayCommands();
 				break;
 
 			}
 
-			input = Integer.parseInt(keyboard.nextLine());
+			
+			try {
+				input = keyboard.nextLine();
+			} catch (Exception e) {
+				System.out.println("Only Integers! Try again.");
+				input = keyboard.nextLine();
+			}
 		}
 		// portfolio.displayEntries();
 
+	}
+
+	private static boolean isIndex(String ticker) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private void displayTicker(String ticker) {
