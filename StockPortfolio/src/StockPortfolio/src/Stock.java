@@ -23,8 +23,9 @@ public class Stock implements PortfolioEntry {
 	private String market;
 	private float numShares;
 	
-	public Stock(String symbol) {
+	public Stock(String symbol, float shares) {
 		this.symbol = symbol;
+		this.numShares = shares;
 		
 	}
 	
@@ -57,15 +58,6 @@ public class Stock implements PortfolioEntry {
 			while ((output = br.readLine()) != null) {
 			    finalJSON = finalJSON + output;			//building the response in JSON format
 			}
-			/*Gson gson = new Gson();
-		    Collection collection = new ArrayList();
-		    collection.add("hello");
-		    collection.add(5);
-		    String json = gson.toJson(collection);
-		    System.out.println("Using Gson.toJson() on a raw collection: " + json);
-		    JsonParser parser = new JsonParser();
-		    JsonArray array = parser.parse(json).getAsJsonArray();
-		    String message = gson.fromJson(array.get(0), String.class);*/
 			
 		    JsonElement jelement = new JsonParser().parse(finalJSON);
 		    JsonObject  jobject = jelement.getAsJsonObject();
@@ -74,7 +66,8 @@ public class Stock implements PortfolioEntry {
 		    jobject = jobject.getAsJsonObject("quote");
 		    System.out.println(jobject.get("Name"));
 		    
-			System.out.println(finalJSON);
+		    
+			//System.out.println(finalJSON);
 
 			  connection.getResponseCode(); 
 			connection.disconnect(); 
