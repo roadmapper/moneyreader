@@ -11,6 +11,8 @@ public interface PortfolioEntry {
 	public float getLastPrice();
 
 	public float getChange();
+	
+	public float getShares();
 
 	public void update();
 

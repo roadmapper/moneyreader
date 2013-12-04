@@ -53,5 +53,9 @@ public class Index implements PortfolioEntry {
 			e.printStackTrace();
 		}
 	}
+	
+	public float getShares() {
+		return 0;
+	}
 
 }

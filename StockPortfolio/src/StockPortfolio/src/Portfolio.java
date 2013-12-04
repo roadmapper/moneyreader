@@ -43,15 +43,8 @@ public class Portfolio {
 		for (int i = 0; i < entryList.size(); i++) {
 			System.out.format(
 					alignFormat,
-					entryList
-							.get(i)
-							.getName()
-							.substring(
-									0,
-									Math.min(entryList.get(i).getName()
-											.length(), 15)), entryList.get(i)
-							.getTicker(), entryList.get(i).getLastPrice(),
-					entryList.get(i).getChange(), "NULL", ((Stock) entryList
+					entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
+					entryList.get(i).getChange(), "NULL", (entryList
 							.get(i)).getShares());
 			System.out
 					.format("+-----------------+----------+-------------+-----------+--------+------------+%n");
