@@ -1,7 +1,7 @@
 package StockPortfolio.src;
 
 public class EntryFactory {
-	public PortfolioEntry createEntry(String type, Object args) {
+	public static PortfolioEntry createEntry(String type, Object args) {
 		String arguments[] = (String[]) args;
 		PortfolioEntry entry = null;
 		switch (type) {

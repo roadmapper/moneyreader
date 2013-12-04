@@ -49,7 +49,8 @@ public class Portfolio {
 		System.out.println("1 - View Individual Stock Data ");
 		System.out.println("2 - Add a Stock ");
 		System.out.println("3 - View Portfolio ");
-		System.out.println("4 - Remove a Stock ");
+		System.out.println("4 - Update Portfolio");
+		System.out.println("5 - Remove a Stock ");
 		System.out.println("0 - Close Application ");
 	}
 
@@ -91,9 +92,11 @@ public class Portfolio {
 			
 			//Individual Stock Data
 			case "1":
-				System.out.println("Enter a ticker symbol:");
+				System.out.println("Enter a stock ticker symbol:");
 				String ticker = keyboard.nextLine();
-				portfolio.displayTicker(ticker);
+				Stock s = (Stock) EntryFactory.createEntry("stock", new String[]{ticker, "0"});
+				s.update();
+				portfolio.displayTicker(s);
 				portfolio.displayCommands();
 				break;
 			//Add Stock 
@@ -114,6 +117,10 @@ public class Portfolio {
 				break;
 			//Remove a Stock	
 			case "4":
+				System.out.println("Updating Portfolio...");
+				portfolio.update();
+				System.out.println("Done.");
+			case "5":
 				System.out.print("Entries to remove (type ticker): \n");
 				for(int i = 0; i < portfolio.entryList.size(); i++){
 					//Get ticker can change
@@ -152,12 +159,15 @@ public class Portfolio {
 		return false;
 	}
 
-	private void displayTicker(String ticker) {
-		String alignFormat = "| %-15s | %-8s | %-11d | %-6d | %-6d | %-10d |%n";
-		String rowSeperator = "+-----------------+----------+-------------+--------+--------+------------+";
+	private void displayTicker(PortfolioEntry entry) {
+		String alignFormat = "| %-15s | %-8s | %-11f | %-8f |%n";
+		String rowSeperator = "+-----------------+----------+-------------+----------+";
+		System.out
+		.printf("|      Name       |  Symbol  | Last Price  |  Change  |%n");
 		System.out.println(rowSeperator);
-		System.out.format(alignFormat, "ticker" + 1, 1 * 1, 1, 1, 1, 1);
+		System.out.format(alignFormat, entry.getName(), entry.getTicker(), entry.getLastPrice(), entry.getChange());
 		System.out.println(rowSeperator);
+		System.out.println();
 
 	}
 

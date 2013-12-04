@@ -103,7 +103,7 @@ public class Stock implements PortfolioEntry {
 
 	@Override
 	public float getChange() {
-		return this.getChange();
+		return this.change;
 	}
 	
 	public float getShares() {
