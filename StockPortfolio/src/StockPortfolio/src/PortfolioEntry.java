@@ -1,5 +1,7 @@
 package StockPortfolio.src;
 
+// This is a test comment!
+
 public interface PortfolioEntry {
 
 	public String getName();
