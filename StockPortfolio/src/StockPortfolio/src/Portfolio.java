@@ -101,7 +101,7 @@ public class Portfolio {
 
 	private void removeEntry(String ticker) {
 		for (int i = 0; i < entryList.size(); i++) {
-			if (entryList.get(i).getTicker().equals("\"" + ticker + "\"")) {
+			if (entryList.get(i).getTicker().equals(ticker)) {
 				entryList.remove(i);
 			}
 		}
