@@ -33,21 +33,30 @@ public class Portfolio {
 		}
 		System.out.println("Portfolio Entries");
 		System.out.println("------------------------");
-		String alignFormat = "| %-15s | %-8s | %-11f | %-7f | %-6s | %-10f |%n";
-		String rowSeparator = "+-----------------+----------+-------------+-----------+--------+------------+";
+		String alignFormat = "| %-15s | %-8s | %-11f | %-7f | %-10s | %-10f |%n";
+		String rowSeparator = "+-----------------+----------+-------------+-----------+------------+------------+";
 		// Print the table header.
 		System.out.println(rowSeparator);
-		System.out.printf("|      Name       |  Symbol  | Last Price  | Change    | Market | Num Shares |%n");
+		System.out.printf("|      Name       |  Symbol  | Last Price  | Change    | Market     | Num Shares |%n");
 		System.out.println(rowSeparator);
 
 		for (int i = 0; i < entryList.size(); i++) {
-			System.out.format(
+			if(entryList.get(i) instanceof Stock){
+				System.out.format(
 					alignFormat,
 					entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
-					entryList.get(i).getChange(), "NULL", (entryList
+					entryList.get(i).getChange(), ((Stock) entryList.get(i)).getMarket(), (entryList
 							.get(i)).getShares());
+			}
+			else{
+				System.out.format(
+						alignFormat,
+						entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
+						entryList.get(i).getChange(), "---------", (entryList
+								.get(i)).getShares());
+			}
 			System.out
-					.format("+-----------------+----------+-------------+-----------+--------+------------+%n");
+					.format("+-----------------+----------+-------------+-----------+------------+------------+%n");
 		}
 
 		System.out.println();
@@ -160,6 +169,7 @@ public class Portfolio {
 				System.out.println("Updating Portfolio...");
 				portfolio.update();
 				System.out.println("Done.");
+				break;
 			// Remove Stock
 			case "6":
 				System.out.println("Enter the ticker symbol of the stock you would like to remove:");
