@@ -178,7 +178,7 @@ public class Portfolio {
 		System.out
 				.printf("|      Name       |  Symbol  | Last Price  |  Change   |%n");
 		System.out.println(rowSeperator);
-		System.out.format(alignFormat, entry.getName().substring(1, 15),
+		System.out.format(alignFormat, entry.getName().substring(0, 15),
 				entry.getTicker(), entry.getLastPrice(), entry.getChange());
 		System.out.println(rowSeperator);
 		System.out.println();
