@@ -24,7 +24,13 @@ public class Portfolio {
 	}
 
 	public void displayEntries() {
-
+		if(entryList.size() <= 0){
+			System.out.println("----------------------------------------------------");
+			System.out.println("Portfolio currently empty, Command 2 to add a stock!");
+			System.out.println("----------------------------------------------------");
+			System.out.println();
+			return;
+		}
 		System.out.println("Portfolio Entries");
 		System.out.println("------------------------");
 		String alignFormat = "| %-15s | %-8s | %-11f | %-7f | %-6s | %-10f |%n";
@@ -37,8 +43,9 @@ public class Portfolio {
 
 		for (int i = 0; i < entryList.size(); i++) {
 			System.out.format(alignFormat, entryList.get(i).getName()
-					.substring(0, 15), entryList.get(i).getTicker(), entryList
-					.get(i).getLastPrice(), entryList.get(i).getChange(),
+					.substring(0, Math.min(entryList.get(i).getName().length(), 15)), 
+						entryList.get(i).getTicker(), entryList
+							.get(i).getLastPrice(), entryList.get(i).getChange(),
 					"NULL", ((Stock) entryList.get(i)).getShares());
 			System.out
 					.format("+-----------------+----------+-------------+-----------+--------+------------+%n");
@@ -160,7 +167,7 @@ public class Portfolio {
 
 	private void removeEntry(String ticker) {
 		for (int i = 0; i < entryList.size(); i++) {
-			if(entryList.get(i).getTicker().equals(ticker)){
+			if(entryList.get(i).getTicker().equals("\""+ticker+"\"")){
 				entryList.remove(i);
 			}
 		}
@@ -178,7 +185,7 @@ public class Portfolio {
 		System.out
 				.printf("|      Name       |  Symbol  | Last Price  |  Change   |%n");
 		System.out.println(rowSeperator);
-		System.out.format(alignFormat, entry.getName().substring(0, 15),
+		System.out.format(alignFormat, entry.getName().substring(0, Math.min(entry.getName().length(), 15)),
 				entry.getTicker(), entry.getLastPrice(), entry.getChange());
 		System.out.println(rowSeperator);
 		System.out.println();
