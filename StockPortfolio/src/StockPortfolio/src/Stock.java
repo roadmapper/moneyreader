@@ -72,7 +72,7 @@ public class Stock implements PortfolioEntry {
 			jobject = jobject.getAsJsonObject("query");
 			jobject = jobject.getAsJsonObject("results");
 			jobject = jobject.getAsJsonObject("quote");
-			this.name = jobject.get("Name").toString();
+			this.name = jobject.get("Name").toString().replaceAll("\"", "");
 			this.symbol = jobject.get("Symbol").toString();
 			this.lastPrice = jobject.get("LastTradePriceOnly").getAsNumber().floatValue();
 			this.change = jobject.get("Change").getAsNumber().floatValue();
