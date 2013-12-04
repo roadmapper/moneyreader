@@ -17,10 +17,12 @@ public class DataAccess {
 	private HttpURLConnection connection;
 	private JsonObject quote;
 
+	// Sets URL to specific stock ticker
 	public DataAccess(String symbol) throws MalformedURLException {
 		this.url = new URL("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22" + symbol + "%22)&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"); // forming url for request
 	}
 
+	// Connects to the web site as defined by the URL
 	public void connect() throws Exception {
 		connection = (HttpURLConnection) url.openConnection(); // this uses a factory! :D
 		connection.setDoOutput(true); // Tells the connection to look for output?
@@ -29,6 +31,7 @@ public class DataAccess {
 		connection.setRequestProperty("Content-Type", "application/json"); // set type to JSON
 	}
 
+	// Gets the string from the URL and parses it into JSON using Gson
 	public void getJSONQuote() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream()))); // Getting the response
 		// from the webservice
@@ -46,6 +49,7 @@ public class DataAccess {
 		quote = jobject;
 	}
 
+	// Closes the connection
 	public void close() throws IOException {
 		connection.getResponseCode();
 		connection.disconnect();
