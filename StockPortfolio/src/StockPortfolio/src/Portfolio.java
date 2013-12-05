@@ -33,32 +33,41 @@ public class Portfolio {
 		}
 		System.out.println("Portfolio Entries");
 		System.out.println("------------------------");
-		String alignFormat = "| %-15s | %-8s | %-11f | %-7f | %-10s | %-10f |%n";
-		String rowSeparator = "+-----------------+----------+-------------+-----------+------------+------------+";
+		String alignFormat = "| %-15s | %-8s | %-11.3f | %-9.3f | %-10s | %-10.3f | %-9.3f | %-9.3f |%n";
+		String rowSeparator = "+-----------------+----------+-------------+-----------+------------+------------+-----------+-----------+";
 		// Print the table header.
 		System.out.println(rowSeparator);
-		System.out.printf("|      Name       |  Symbol  | Last Price  | Change    | Market     | Num Shares |%n");
+		System.out.printf("|      Name       |  Symbol  | Last Price  | Change    | Market     | Num Shares | Value     | DayChange |%n");
 		System.out.println(rowSeparator);
-
+		float value = 0;
+		float dayChange = 0;
 		for (int i = 0; i < entryList.size(); i++) {
 			if(entryList.get(i) instanceof Stock){
+				
+				float totalValue = entryList.get(i).getLastPrice()*entryList.get(i).getShares();
+				float totalChange = entryList.get(i).getChange()*entryList.get(i).getShares();
+				
 				System.out.format(
 					alignFormat,
 					entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
 					entryList.get(i).getChange(), ((Stock) entryList.get(i)).getMarket(), (entryList
-							.get(i)).getShares());
+							.get(i)).getShares(), totalValue, totalChange);
+				
+					value += totalValue;
+					dayChange += totalChange;
+					
 			}
 			else{
 				System.out.format(
 						alignFormat,
 						entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
-						entryList.get(i).getChange(), "---------", (entryList
-								.get(i)).getShares());
+						entryList.get(i).getChange(), "---------", "---------", "---------");
 			}
-			System.out
-					.format("+-----------------+----------+-------------+-----------+------------+------------+%n");
+			System.out.println(rowSeparator);
 		}
-
+		
+		String alignFormat2 = "| %-15s | %-8s | %-11s | %-9s | %-10s | %-10s | %-9.3f | %-9.3f |%n";
+		System.out.format(alignFormat2, "Total", "", "", "","","",value, dayChange);
 		System.out.println();
 
 	}
@@ -92,7 +101,7 @@ public class Portfolio {
 	}
 
 	public void addStock(String ticker) {
-		System.out.println("How many shares? (Integer):");
+		System.out.println("How many shares? (Float):");
 		Scanner keyboard = new Scanner(System.in);
 		String numShares = keyboard.nextLine();
 		Stock s = (Stock) EntryFactory.createEntry(EntryType.STOCK, new String[] {
@@ -169,6 +178,7 @@ public class Portfolio {
 				System.out.println("Updating Portfolio...");
 				portfolio.update();
 				System.out.println("Done.");
+				portfolio.displayCommands();
 				break;
 			// Remove Stock
 			case "6":
