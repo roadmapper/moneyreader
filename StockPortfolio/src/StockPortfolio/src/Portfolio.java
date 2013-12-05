@@ -109,7 +109,7 @@ public class Portfolio {
 		Stock s = (Stock) EntryFactory.createEntry(EntryType.STOCK, new String[] {
 				ticker, numShares });
 		
-		if(s.getMarket().equals("null")){
+		if(s.getMarket() != null){
 			s.update();
 			entryList.add(s);
 		}

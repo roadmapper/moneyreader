@@ -51,7 +51,7 @@ public class DataAccess {
 			jobject = jelement.getAsJsonObject().getAsJsonObject("query").getAsJsonObject("results").getAsJsonObject("quote");
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		quote = jobject;

@@ -17,10 +17,12 @@ public class Stock implements PortfolioEntry {
 			d.connect();
 			d.getJSONQuote();
 			this.name = d.getName();
-			this.market = d.getMarket();
+			String marketQuery = d.getMarket();
+			if (!(marketQuery.equals("null")))
+				this.market = marketQuery;
 			d.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -39,7 +41,7 @@ public class Stock implements PortfolioEntry {
 			this.change = d.getChange();
 			d.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 

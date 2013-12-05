@@ -16,7 +16,7 @@ public class Index implements PortfolioEntry {
 			this.name = d.getName();
 			d.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class Index implements PortfolioEntry {
 			this.change = d.getChange();
 			d.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
