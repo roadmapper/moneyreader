@@ -45,8 +45,15 @@ public class DataAccess {
 			// format
 		}
 
+		JsonObject jobject = null;
 		JsonElement jelement = new JsonParser().parse(finalJSON);
-		JsonObject jobject = jelement.getAsJsonObject().getAsJsonObject("query").getAsJsonObject("results").getAsJsonObject("quote");
+		try {
+			jobject = jelement.getAsJsonObject().getAsJsonObject("query").getAsJsonObject("results").getAsJsonObject("quote");
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		quote = jobject;
 	}
 
