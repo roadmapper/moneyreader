@@ -109,14 +109,24 @@ public class Portfolio {
 		Stock s = (Stock) EntryFactory.createEntry(EntryType.STOCK, new String[] {
 				ticker, numShares });
 		s.update();
-		entryList.add(s);
+		if(s.getName() != null){
+			entryList.add(s);
+		}
+		else
+			System.out.println("Invalid Index or Data");
+			
 	}
 	
 	private void addIndex(String ticker) {
 		Index i = (Index) EntryFactory.createEntry(EntryType.INDEX, new String[] {
 				ticker });
 		i.update();
-		entryList.add(i);
+		if (i.getName() != null){
+			entryList.add(i);
+		}
+		else
+			System.out.println("Invalid Index or Data");
+		
 	}
 
 	private void removeEntry(String ticker) {
