@@ -108,8 +108,9 @@ public class Portfolio {
 		String numShares = keyboard.nextLine();
 		Stock s = (Stock) EntryFactory.createEntry(EntryType.STOCK, new String[] {
 				ticker, numShares });
-		s.update();
+		
 		if(s.getName() != null){
+			s.update();
 			entryList.add(s);
 		}
 		else
@@ -120,8 +121,9 @@ public class Portfolio {
 	private void addIndex(String ticker) {
 		Index i = (Index) EntryFactory.createEntry(EntryType.INDEX, new String[] {
 				ticker });
-		i.update();
+		
 		if (i.getName() != null){
+			i.update();
 			entryList.add(i);
 		}
 		else
