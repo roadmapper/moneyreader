@@ -33,7 +33,9 @@ public class Portfolio {
 		}
 		System.out.println("Portfolio Entries");
 		System.out.println("------------------------");
-		String alignFormat = "| %-15s | %-8s | %-11.3f | %-9.3f | %-10s | %-10.3f | %-9.3f | %-9.3f |%n";
+		String alignFormat  = "| %-15s | %-8s | %-11.3f | %-9.3f | %-10s | %-10.3f | %-9.3f | %-9.3f |%n";
+		String alignFormat2 = "| %-15s | %-8s | %-11s | %-9s | %-10s | %-10s | %-9.3f | %-9.3f |%n";
+		String alignFormat3 = "| %-15s | %-8s | %-11s | %-9s | %-10s | %-10s | %-9s | %-9s |%n";
 		String rowSeparator = "+-----------------+----------+-------------+-----------+------------+------------+-----------+-----------+";
 		// Print the table header.
 		System.out.println(rowSeparator);
@@ -59,14 +61,14 @@ public class Portfolio {
 			}
 			else{
 				System.out.format(
-						alignFormat,
+						alignFormat3,
 						entryList.get(i).getName().substring(0,	Math.min(entryList.get(i).getName().length(), 15)), entryList.get(i).getTicker(), entryList.get(i).getLastPrice(),
-						entryList.get(i).getChange(), "---------", "---------", "---------");
+						entryList.get(i).getChange(), "---------", "---------", "---------", "---------");
 			}
 			System.out.println(rowSeparator);
 		}
 		
-		String alignFormat2 = "| %-15s | %-8s | %-11s | %-9s | %-10s | %-10s | %-9.3f | %-9.3f |%n";
+		
 		System.out.format(alignFormat2, "Total", "", "", "","","",value, dayChange);
 		System.out.println();
 
